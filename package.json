@@ -1,0 +1,24 @@
+{
+  "name": "react-native-picker-android",
+  "version": "1.7.1",
+  "description": "A button for React apps",
+  "main": "Button.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andylidong/react-native-picker-android.git"
+  },
+  "keywords": [
+    "react-native",
+    "button",
+    "component"
+  ],
+  "author": "James Ide",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andylidong/react-native-picker-android.git/issues"
+  },
+  "homepage": "https://github.com/andylidong/react-native-picker-android"
+}
