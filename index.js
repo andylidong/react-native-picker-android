@@ -11,7 +11,7 @@ export default class WheelPicker extends Component {
 	}
 
 	toggle() {
-		WheelPicker.toggle();
+		WheelPicker.toggle(() => console.log('object'););
 	}
 
 	getResult() {

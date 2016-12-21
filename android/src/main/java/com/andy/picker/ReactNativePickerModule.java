@@ -1,4 +1,6 @@
-package com.andy.picker;
+package com.artsvgdemo;
+
+import android.util.Log;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.facebook.react.bridge.Callback;
@@ -20,11 +22,9 @@ public class ReactNativePickerModule extends ReactContextBaseJavaModule {
 
     private TimePickerView pvTime;
 
-    private ReactApplicationContext reactContext;
-
     public ReactNativePickerModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        this.reactContext = reactContext;
+        Log.i(REACT_CLASS, "ReactNativePickerModule == " + reactContext);
     }
 
     @Override
@@ -34,20 +34,28 @@ public class ReactNativePickerModule extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
-    public  void toggle() {
-        //时间选择器
-        pvTime = new TimePickerView(reactContext, TimePickerView.Type.ALL);
-        // 控制时间范围
-        Calendar calendar = Calendar.getInstance();
-        pvTime.setRange(calendar.get(Calendar.YEAR) - 20, calendar.get(Calendar.YEAR));//要在setTime 之前才有效果哦
-        pvTime.setTime(new Date());
-        pvTime.setCyclic(false);
-        pvTime.setCancelable(true);
-        // 判断是否打开了选择器
-        if (pvTime.isShowing()) {
-            pvTime.dismiss();
-        } else {
-            pvTime.show();
+    public void toggle(){
+        Log.i(REACT_CLASS, "toggle");
+        if (getCurrentActivity() != null) {
+            getCurrentActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    //时间选择器
+                    pvTime = new TimePickerView(getCurrentActivity(), TimePickerView.Type.ALL);
+                    // 控制时间范围
+                    Calendar calendar = Calendar.getInstance();
+                    pvTime.setRange(calendar.get(Calendar.YEAR) - 20, calendar.get(Calendar.YEAR));//要在setTime 之前才有效果哦
+                    pvTime.setTime(new Date());
+                    pvTime.setCyclic(false);
+                    pvTime.setCancelable(true);
+                    // 判断是否打开了选择器
+                    if (pvTime.isShowing()) {
+                        pvTime.dismiss();
+                    } else {
+                        pvTime.show();
+                    }
+                }
+            });
         }
     }
 
