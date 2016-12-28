@@ -1,5 +1,10 @@
 # react-native-picker-android
 
+![image]https://github.com/andylidong/react-native-picker-android/pickerImage/1.jpg
+![image]https://github.com/andylidong/react-native-picker-android/pickerImage/2.jpg
+![image]https://github.com/andylidong/react-native-picker-android/pickerImage/3.jpg
+![image]https://github.com/andylidong/react-native-picker-android/pickerImage/4.jpg
+
 ##这是Android端的picker，它包含了两种类型的picker
 
 ###1.时间选择器，包含了五中时间的选择，
