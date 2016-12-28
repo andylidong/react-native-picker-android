@@ -1,12 +1,12 @@
 # react-native-picker-android
 
-<img src="https://github.com/andylidong/react-native-picker-android/blob/master/pickerImage/1.jpg" width=256 height=560 />
+<img src="https://github.com/andylidong/react-native-picker-android/blob/master/pickerImage/1.jpg" width=256 height=480 />
 
-<img src="https://github.com/andylidong/react-native-picker-android/blob/master/pickerImage/2.jpg" width=256 height=560 />
+<img src="https://github.com/andylidong/react-native-picker-android/blob/master/pickerImage/2.jpg" width=256 height=480 />
 
-<img src="https://github.com/andylidong/react-native-picker-android/blob/master/pickerImage/3.jpg" width=256 height=560 />
+<img src="https://github.com/andylidong/react-native-picker-android/blob/master/pickerImage/3.jpg" width=256 height=480 />
 
-<img src="https://github.com/andylidong/react-native-picker-android/blob/master/pickerImage/4.jpg" width=256 height=560 />
+<img src="https://github.com/andylidong/react-native-picker-android/blob/master/pickerImage/4.jpg" width=256 height=480 />
 
 
 ##这是Android端的picker，它包含了两种类型的picker
