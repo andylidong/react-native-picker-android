@@ -18,7 +18,7 @@ public class ReactNativePickerPackage implements ReactPackage {
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.<NativeModule>asList(new ReactNativePickerModule(reactContext));
+        return Collections.emptyList();
     }
 
     @Override
@@ -28,6 +28,6 @@ public class ReactNativePickerPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+        return Arrays.<ViewManager>asList(new ReactNativePickerModule());
     }
 }
