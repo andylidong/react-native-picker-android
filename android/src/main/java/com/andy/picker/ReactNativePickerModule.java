@@ -1,12 +1,11 @@
 package com.andy.picker;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.andy.picker.wheel.ItemSelectedEvent;
 import com.andy.picker.wheel.WheelTimeType;
 import com.andy.picker.wheel.WheelType;
-import com.bigkoo.pickerview.TimePickerView;
+import com.andylidong.pickerview.TimePickerView;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -15,12 +14,10 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,7 +56,7 @@ public class ReactNativePickerModule extends SimpleViewManager<WheelType> {
     @ReactProp(name = "initTime")
     public void setInitTime(final WheelType wtPicker, final ReadableMap items) {
         Log.i(REACT_CLASS, "initTime ============" + items);
-        if (reactContext == null) return;
+        if (reactContext.getCurrentActivity() == null) return;
         reactContext.getCurrentActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -91,7 +88,7 @@ public class ReactNativePickerModule extends SimpleViewManager<WheelType> {
                             timeFormatter = WheelTimeType.YEAR_MONTH_S;
                             break;
                     }
-                    wtPicker.setTimeInit(type);
+                    wtPicker.setTimeInit(reactContext, type);
                     // 设置时间的开始年份和结束年份
                     String data = items.hasKey("data") ? items.getString("data") : "2015-2018";
                     String dataTemp[] = data.split("-");
@@ -110,6 +107,29 @@ public class ReactNativePickerModule extends SimpleViewManager<WheelType> {
                     wtPicker.setTimeCyclic(false);
                     // 设置点击色区域是否显示
                     wtPicker.setTimeCancelable(true);
+                    // 设置标题
+                    String title = items.hasKey("title") ? items.getString("title") : "";
+                    wtPicker.setTimeTitle(title);
+                    // 设置确定的文本信息
+                    String submitText = items.hasKey("submit") ? items.getString("submit") : "";
+                    wtPicker.setTimeSubmit(submitText);
+                    // 设置取消的文本信息
+                    String cancelText = items.hasKey("cancel") ? items.getString("cancel") : "";
+                    wtPicker.setTimeCancel(cancelText);
+                    // 设置是否显示今天
+                    boolean isShowToday = items.hasKey("today") ? items.getBoolean("today") : true;
+                    wtPicker.setToday(isShowToday);
+                    // 设置显示年月日时分
+                    String yearText = items.hasKey("year") ? items.getString("year") : "年";
+                    wtPicker.setYearText(yearText);
+                    String monthText = items.hasKey("month") ? items.getString("month") : "月";
+                    wtPicker.setMonthText(monthText);
+                    String dayText = items.hasKey("day") ? items.getString("day") : "日";
+                    wtPicker.setDayText(dayText);
+                    String hourText = items.hasKey("hour") ? items.getString("hour") : "时";
+                    wtPicker.setHourText(hourText);
+                    String minuteText = items.hasKey("minute") ? items.getString("minute") : "分";
+                    wtPicker.setMinuteText(minuteText);
                     // 设置picker的选中值
                     int isShow = items.hasKey("selectedTime") ? items.getInt("selectedTime") : 0;
                     if (isShow == 0) {
@@ -134,7 +154,7 @@ public class ReactNativePickerModule extends SimpleViewManager<WheelType> {
     @ReactProp(name = "initOption")
     public void setInitOption(final WheelType wtPicker, final ReadableMap items) {
         Log.i(REACT_CLASS, "initOption ============" + items);
-        if (reactContext == null) return;
+        if (reactContext.getCurrentActivity() == null) return;
         reactContext.getCurrentActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -149,7 +169,7 @@ public class ReactNativePickerModule extends SimpleViewManager<WheelType> {
                     for (int i = 0; i < optionsItem.size(); i++) {
                         options.add(optionsItem.getString(i));
                     }
-                    wtPicker.setOptionInit(options);
+                    wtPicker.setOptionInit(reactContext, options);
                     // 设置picker的数据
                     wtPicker.setPicker(options);
                     // 设置picker的选中值
@@ -159,6 +179,15 @@ public class ReactNativePickerModule extends SimpleViewManager<WheelType> {
                     wtPicker.setOptionCyclic(false);
                     // 设置点击色区域是否显示
                     wtPicker.setOptionCancelable(true);
+                    // 设置标题
+                    String title = items.hasKey("title") ? items.getString("title") : "";
+                    wtPicker.setOptionTitle(title);
+                    // 设置确定的文本信息
+                    String submitText = items.hasKey("submit") ? items.getString("submit") : "";
+                    wtPicker.setOptionSubmit(submitText);
+                    // 设置取消的文本信息
+                    String cancelText = items.hasKey("cancel") ? items.getString("cancel") : "";
+                    wtPicker.setOptionCancel(cancelText);
                     // 设置picker的选中值
                     int isShow = items.hasKey("selectedOption") ? items.getInt("selectedOption") : 0;
                     if (isShow == 0) {

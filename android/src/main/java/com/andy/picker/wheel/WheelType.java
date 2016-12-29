@@ -1,9 +1,10 @@
 package com.andy.picker.wheel;
 
+import android.text.TextUtils;
 import android.view.View;
 
-import com.bigkoo.pickerview.OptionsPickerView;
-import com.bigkoo.pickerview.TimePickerView;
+import com.andylidong.pickerview.OptionsPickerView;
+import com.andylidong.pickerview.TimePickerView;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.events.EventDispatcher;
@@ -20,13 +21,11 @@ public class WheelType extends View {
 
     private final EventDispatcher mEventDispatcher;
 
-    private ReactContext reactContext;
-
     // 选项选择器
     private OptionsPickerView opPicker;
 
     // 时间选择器
-    private TimePickerView wtPicker;
+    private TimePickerView tpPicker;
 
     // 时间的格式
     private static String timeFormatter;
@@ -34,24 +33,21 @@ public class WheelType extends View {
     public WheelType(ReactContext reactContext) {
         super(reactContext);
         mEventDispatcher = reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
-        if (reactContext.getCurrentActivity() != null) {
-            this.reactContext = reactContext;
-        }
     }
 
     /**
      * 设置时间picker显示的类型
      * @param type
      */
-    public void setTimeInit(TimePickerView.Type type) {
-        if (wtPicker != null) {
-            wtPicker = null;
+    public void setTimeInit(ReactContext reactContext,TimePickerView.Type type) {
+        if (tpPicker != null) {
+           tpPicker = null;
         }
-        wtPicker = new TimePickerView(reactContext.getCurrentActivity(), type);
+        tpPicker = new TimePickerView(reactContext.getCurrentActivity(), type);
         // 设置标题的内容
         setTimeTitle("");
         // 获取选中的信息
-        wtPicker.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
+        tpPicker.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date) {
                 mEventDispatcher.dispatchEvent(
@@ -66,11 +62,11 @@ public class WheelType extends View {
      * @param endYear
      */
     public void setTimeData(int startYear, int endYear) {
-        if (wtPicker == null) {
+        if (tpPicker == null) {
             return;
         }
         // 设置数据的范围 要在setTime 之前才有效果哦
-        wtPicker.setRange(startYear, endYear);
+        tpPicker.setRange(startYear, endYear);
     }
 
     /**
@@ -78,11 +74,11 @@ public class WheelType extends View {
      * @param date
      */
     public void setTime(Date date) {
-        if (wtPicker == null) {
+        if (tpPicker == null) {
             return;
         }
         // 设置选中的时间
-        wtPicker.setTime(date, timeFormatter);
+        tpPicker.setTime(date, timeFormatter);
     }
 
     /**
@@ -90,10 +86,10 @@ public class WheelType extends View {
      * @param title
      */
     public void setTimeTitle(String title) {
-        if (wtPicker == null) {
+        if (tpPicker == null) {
             return;
         }
-        wtPicker.setTitle(title);
+        tpPicker.setTitle(title);
     }
 
     /**
@@ -101,10 +97,10 @@ public class WheelType extends View {
      * @param isCyclic
      */
     public void setTimeCyclic(boolean isCyclic) {
-        if (wtPicker == null) {
+        if (tpPicker == null) {
             return;
         }
-        wtPicker.setCyclic(isCyclic);
+        tpPicker.setCyclic(isCyclic);
     }
 
 
@@ -113,10 +109,103 @@ public class WheelType extends View {
      * @param isCancelable
      */
     public void setTimeCancelable(boolean isCancelable) {
-        if (wtPicker == null) {
+        if (tpPicker == null) {
             return;
         }
-        wtPicker.setCancelable(isCancelable);
+        tpPicker.setCancelable(isCancelable);
+    }
+
+    /**
+     * 设置确定的按钮信息
+     * @param submitText
+     */
+    public void setTimeSubmit(String submitText) {
+        if (tpPicker == null) {
+            return;
+        }
+        tpPicker.setSubmit(submitText);
+    }
+
+    /**
+     * 设置取消的按钮信息
+     * @param cancelText
+     */
+    public void setTimeCancel(String cancelText) {
+        if (tpPicker == null) {
+            return;
+        }
+        tpPicker.setCancel(cancelText);
+    }
+
+
+    /**
+     * 设置今天是否显示
+     * @param isShowToday
+     */
+    public void setToday(boolean isShowToday) {
+        if (tpPicker == null) {
+            return;
+        }
+        tpPicker.setToday(isShowToday);
+    }
+
+
+    /**
+     * 设置年份的信息
+     * @param yearText
+     */
+    public void setYearText(String yearText) {
+        if (tpPicker == null) {
+            return;
+        }
+        tpPicker.setYearText(yearText);
+    }
+
+    /**
+     * 设置月份的信息
+     * @param monthText
+     */
+    public void setMonthText(String monthText) {
+        if (tpPicker == null) {
+            return;
+        }
+        tpPicker.setMonthText(monthText);
+    }
+
+
+    /**
+     * 设置日期的信息
+     * @param dayText
+     */
+    public void setDayText(String dayText) {
+        if (tpPicker == null) {
+            return;
+        }
+        tpPicker.setDayText(dayText);
+    }
+
+
+    /**
+     * 设置小时的信息
+     * @param hourText
+     */
+    public void setHourText(String hourText) {
+        if (tpPicker == null) {
+            return;
+        }
+        tpPicker.setHourText(hourText);
+    }
+
+
+    /**
+     * 设置分钟的信息
+     * @param minuteText
+     */
+    public void setMinuteText(String minuteText) {
+        if (tpPicker == null) {
+            return;
+        }
+        tpPicker.setMinuteText(minuteText);
     }
 
 
@@ -124,18 +213,18 @@ public class WheelType extends View {
      * 判断picker是否显示
      */
     public boolean isTimeShowing() {
-        if (wtPicker == null) {
+        if (tpPicker == null) {
             return false;
         }
-        return wtPicker.isShowing();
+        return tpPicker.isShowing();
     }
 
     /**
      * 隐藏picker
      */
     public void dismissTime () {
-        if (wtPicker != null) {
-            wtPicker.dismiss();
+        if (tpPicker != null) {
+            tpPicker.dismiss();
         }
     }
 
@@ -143,8 +232,8 @@ public class WheelType extends View {
      * 显示picker
      */
     public void showTime() {
-        if (wtPicker != null) {
-            wtPicker.show();
+        if (tpPicker != null) {
+            tpPicker.show();
         }
     }
 
@@ -171,7 +260,7 @@ public class WheelType extends View {
     /**
      * 设置选项picker显示的初始化
      */
-    public void setOptionInit(final ArrayList<String> options) {
+    public void setOptionInit(ReactContext reactContext, final ArrayList<String> options) {
         //选项选择器
         if (opPicker != null) {
             opPicker = null;
@@ -249,6 +338,29 @@ public class WheelType extends View {
         }
         opPicker.setCancelable(isCancelable);
     }
+
+    /**
+     * 设置确定的按钮信息
+     * @param submitText
+     */
+    public void setOptionSubmit(String submitText) {
+        if (opPicker == null) {
+            return;
+        }
+        opPicker.setSubmit(submitText);
+    }
+
+    /**
+     * 设置取消的按钮信息
+     * @param cancelText
+     */
+    public void setOptionCancel(String cancelText) {
+        if (opPicker == null) {
+            return;
+        }
+        opPicker.setCancel(cancelText);
+    }
+
 
     /**
      * 判断picker是否显示
