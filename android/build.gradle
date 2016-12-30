@@ -18,8 +18,9 @@ android {
     }
 }
 
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.facebook.react:react-native:+'
-    compile project(path: ':pickerview')
+    compile 'com.github.andylidong:pickerview:v1.0.0'
 }
