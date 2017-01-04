@@ -5,6 +5,8 @@ import android.view.View;
 
 import com.andylidong.pickerview.OptionsPickerView;
 import com.andylidong.pickerview.TimePickerView;
+import com.andylidong.pickerview.listener.OnOptionsSelectListener;
+import com.andylidong.pickerview.listener.OnTimeSelectListener;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.events.EventDispatcher;
@@ -47,11 +49,17 @@ public class WheelType extends View {
         // 设置标题的内容
         setTimeTitle("");
         // 获取选中的信息
-        tpPicker.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
+        tpPicker.setOnTimeSelectListener(new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date) {
+                // 获取最后的监听数据
                 mEventDispatcher.dispatchEvent(
                         new ItemSelectedEvent(getId(), getTime(date)));
+            }
+
+            @Override
+            public void onTimeSelect(String year, String month, String day, String hour, String minutes) {
+                // 滑动监听，在title中显示获取的数据，也可以在这里处理，获取选中的结果
             }
         });
     }
@@ -268,9 +276,17 @@ public class WheelType extends View {
         opPicker = new OptionsPickerView(reactContext.getCurrentActivity());
         // 设置选择的标题
         setOptionTitle("");
-        opPicker.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+        opPicker.setOnoptionsSelectListener(new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3) {
+                // 数据关联 -- 类似省市区、省市县等
+                mEventDispatcher.dispatchEvent(
+                        new ItemSelectedEvent(getId(), options.get(options1)));
+            }
+
+            @Override
+            public void onOptionsSelect(int options1) {
+                // 获取单行数据
                 mEventDispatcher.dispatchEvent(
                         new ItemSelectedEvent(getId(), options.get(options1)));
             }

@@ -26,10 +26,9 @@ public interface WheelTimeType {
 
     public final String MONTH_DAY_HOUR_MIN_S = "MM-dd HH:mm";
 
-    // YEAR_MONTH
+    // 年月
     public final int YEAR_MONTH = 5;
 
     public final String YEAR_MONTH_S = "yyyy-MM";
-
 
 }
